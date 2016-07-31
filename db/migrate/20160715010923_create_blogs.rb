@@ -7,7 +7,6 @@ class CreateBlogs < ActiveRecord::Migration
       t.string :string
       t.integer :author_id
       t.string :datePosted
-
       t.timestamps null: false
     end
   end

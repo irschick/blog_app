@@ -1,34 +1,37 @@
 <p id="notice"><%= notice %></p>
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <div class="post-preview">
+          <h2 class="post-title">
+            <%= @blog.headline %>
+          </h2>
+          <p class="post-meta">Posted by <a href="#">Michael Irschick</a> on <%= @blog.datePosted %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Headline:</strong>
-  <%= @blog.headline %>
-</p>
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
+        <p><%= @blog.content %></p>
+      </div>
+    </div>
+  </div>
+</article>
 
-<p>
-  <strong>Teaser:</strong>
-  <%= @blog.teaser %>
-</p>
 
-<p>
-  <strong>Content:</strong>
-  <%= @blog.content %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
+      <%= link_to 'Edit', edit_blog_path(@blog) %> |
+      <%= link_to 'Back', blogs_path %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>String:</strong>
-  <%= @blog.string %>
-</p>
 
-<p>
-  <strong>Author:</strong>
-  <%= @blog.author_id %>
-</p>
-
-<p>
-  <strong>Dateposted:</strong>
-  <%= @blog.datePosted %>
-</p>
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>

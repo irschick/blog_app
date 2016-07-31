@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715010923) do
+ActiveRecord::Schema.define(version: 20160726043816) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160715010923) do
   create_table "blogs", force: :cascade do |t|
     t.string   "headline"
     t.string   "teaser"
-    t.string   "content"
+    t.text     "content"
     t.string   "string"
     t.integer  "author_id"
     t.string   "datePosted"

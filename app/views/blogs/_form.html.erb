@@ -1,43 +1,30 @@
-<div class="row">
-  <div class="col-md-2 col-md-offset-1">
-    <%= form_for(@blog) do |f| %>
-        <% if @blog.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this product from being saved:</h2>
-              <ul>
-                <% @blog.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <div class="field">
-          <%= f.label :headline %><br>
-          <%= f.text_field :headline %>
-        </div>
-        <div class="field">
-          <%= f.label :teaser %><br>
-          <%= text_area_tag(:teaser, "", size: "100x6") %>
-        </div>
-        <div class="field">
-          <%= f.label :content %><br>
-          <%= text_area_tag(:content, "", size: "100x10") %>
-        </div>
-        <div class="field">
-          <%= f.label :author_id %><br>
-          <%= f.number_field :author_id %>
-        </div>
-        <div class="field">
-          <%= f.label 'Date Posted' %><br>
-          <%= f.text_field :datePosted %>
-        </div>
-        <div class="actions">
-          <button id="whatever" class="btn btn-primary" name="submit" type="submit">
-            <span>Save</span>
-            <i class="icon-ok" style="font-size:20px; vertical-align: middle;"></i>
-          </button>
+<%= form_for(@blog) do |f| %>
+    <% if @blog.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this product from being saved:</h2>
+          <ul>
+            <% @blog.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
         </div>
     <% end %>
-  </div>
-</div>
+    <div class="field">
+      <%= f.label :headline %><br>
+      <%= f.text_field :headline %>
+    </div>
+    <div class="field">
+      <%= f.label :content %><br>
+      <%= f.text_area :content, size: "40x40"%>
+    </div>
+    <div class="field">
+      <%= f.label 'Date Posted' %><br>
+      <%= f.text_field :datePosted %>
+    </div>
+    <div class="actions">
+      <button id="whatever" class="btn btn-primary" name="submit" type="submit">
+        <span>Save</span>
+        <i class="icon-ok" style="font-size:20px; vertical-align: middle;"></i>
+      </button>
+    </div>
+<% end %>

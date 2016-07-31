@@ -1,37 +1,93 @@
-<p id="notice"><%= notice %></p>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/assets/wall.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>Irschick Blog</h1>
+          <hr class="small">
+          <span class="subheading">Blogging for Product Managers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-<h1>Listing Blogs</h1>
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <% @blogs.each do |blog| %>
+                    <div class="post-preview">
+                      <%= link_to(blog) do %>
+                            <h2 class="post-title">
+                      <%= blog.headline %>
+                    </h2>
+                          <p class="post-meta">Posted by Michael Irschick on <%= blog.datePosted %></p>
+                      <% end %>
+                    </div>
+                    <div>
+                      <%= link_to 'View', blog %>
+                      <%= link_to 'Edit', edit_blog_path(blog) %>
+                    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Headline</th>
-      <th>Teaser</th>
-      <th>Content</th>
-      <th>String</th>
-      <th>Author</th>
-      <th>Dateposted</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+                    <hr>
+                <% end %>
+                <ul class="pager">
+                  <li class="next">
+                    <%= link_to 'Add Blog', new_blog_path %>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--<div class="col-xs-4" style="background: grey">-->
+            <!--<div class="row">-->
+              <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                  <!--<i class="fa fa-bell fa-fw"></i> Irschick Blog-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+                <!--<div class="panel-body">-->
+                  <!--<div class="list-group">-->
+                    <!--<a href="#" class="list-group-item">-->
+                      <!--<i class="fa fa-comment fa-fw"></i> New Comment-->
+                                    <!--<span class="pull-right text-muted small"><em>4 minutes ago</em>-->
+                                    <!--</span>-->
+                    <!--</a>-->
+                    <!--<a href="#" class="list-group-item">-->
+                      <!--<i class="fa fa-twitter fa-fw"></i> 3 New Followers-->
+                                    <!--<span class="pull-right text-muted small"><em>12 minutes ago</em>-->
+                                    <!--</span>-->
+                    <!--</a>-->
+                    <!--<a href="#" class="list-group-item">-->
+                      <!--<i class="fa fa-envelope fa-fw"></i> Message Sent-->
+                                    <!--<span class="pull-right text-muted small"><em>27 minutes ago</em>-->
+                                    <!--</span>-->
+                    <!--</a>-->
+                    <!--<a href="#" class="list-group-item">-->
+                      <!--<i class="fa fa-tasks fa-fw"></i> New Task-->
+                                    <!--<span class="pull-right text-muted small"><em>43 minutes ago</em>-->
+                                    <!--</span>-->
+                    <!--</a>-->
+                  <!--</div>-->
+                  <!--&lt;!&ndash; /.list-group &ndash;&gt;-->
+                  <!--<a href="#" class="btn btn-default btn-block">View All Alerts</a>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.headline %></td>
-        <td><%= blog.teaser %></td>
-        <td><%= blog.content %></td>
-        <td><%= blog.string %></td>
-        <td><%= blog.author_id %></td>
-        <td><%= blog.datePosted %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
 
-<%= link_to 'New Blog', new_blog_path %>

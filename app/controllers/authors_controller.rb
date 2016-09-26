@@ -10,6 +10,12 @@ class AuthorsController < ApplicationController
   # GET /authors/1
   # GET /authors/1.json
   def show
+    @author = Author.find(params[:id])
+    respond_to do |format|
+      format.html # show.html.erb
+      format.js # show.js.erb
+      format.json { render json: @author }
+    end
   end
 
   # GET /authors/new

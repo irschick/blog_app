@@ -15,6 +15,52 @@
   </div>
 </header>
 
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#myFirstModal">
+  Show Modal
+</button>
+
+<div class="modal fade" id="myFirstModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">This is a modal</h4>
+      </div>
+      <div class="modal-body">
+        <p>The content goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <p>This is the footer.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="modal hide fade">-->
+  <!--<div class="modal-header">-->
+    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+    <!--<h3 class="modal-heading">Modal header</h3>-->
+  <!--</div>-->
+  <!--<div class="modal-body">-->
+    <!--<p>One fine body…</p>-->
+  <!--</div>-->
+  <!--<div class="modal-footer">-->
+    <!--<a href="#" class="btn" data-dismiss="modal">Close</a>-->
+    <!--<a href="#" class="btn btn-primary">Add to Cart</a>-->
+  <!--</div>-->
+<!--</div>-->
+
+
+<!--<table>-->
+  <!--<% @authors.each do |author| %>-->
+      <!--<tr>-->
+        <!--<td><%= author.name %></td>-->
+        <!--<td><%= link_to 'View Details', author, remote: true %></td>-->
+      <!--</tr>-->
+  <!--<% end %>-->
+<!--</table>-->
+
+
 <div class="container">
   <div class="container">
     <div class="row">
@@ -31,7 +77,7 @@
                       <% end %>
                     </div>
                     <div>
-                      <%= link_to 'View', author %>
+                      <%= link_to 'View', author, remote: true %>
                       <%= link_to 'Edit', edit_author_path(author) %>
                     </div>
                     <hr>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Michael Irschick Blog App</title>
+  <title>Blog</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -10,8 +10,12 @@
   <script src="https://use.fontawesome.com/ade38bac0c.js"></script>
   <%= csrf_meta_tags %>
 </head>
-<body data-spy="scroll" data-target=".navbar">
 
+<!-- for FF, Chrome, Opera -->
+<link rel="icon" type="image/png" href="/assets/blog.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/assets/blog.png" sizes="32x32">
+
+<body data-spy="scroll" data-target=".navbar">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid" id="navfluid">
     <div class="navbar-header">
@@ -22,14 +26,28 @@
         <span class="icon-bar"></span>
       </button>
       <div class="home navbar-brand">
-        <a href="/blogs">Blogs <i class="fa fa-home" aria-hidden="true"></i></a>
+        <a href="/">Home <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
       </div>
     </div>
     <div class="navbar-collapse collapse" id="navigationbar">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="/blogs">Blogs</a></li>
         <li><a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a></li>
+        <li>
+          <% if user_signed_in? %>
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          <% else %>
+              <%= link_to('Login', new_user_session_path) %>
+          <% end %>
+        </li>
       </ul>
     </div>
+    <% if notice %>
+        <p id="notice" class="alert alert-info"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+        <p id="alert" class="alert alert-danger"><%= alert %></p>
+    <% end %>
   </div>
 </nav>
 

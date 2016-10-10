@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  # get 'static_pages/landing_page'
-  # get 'static_pages/post'
+  devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
+  resources :users
   root 'blogs#index'
-  resources :blogs
+  resources :blogs do
+    resources :comments
+  end
   resources :authors
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,35 @@
+<div class="col-sm-12">
+  <h3>All User Comments</h3>
+  <div class="blog-reviews">
+    <% @comments.each do |comment| %>
+      <% if !comment.bad_record?   %>
+        <div class="row">
+          <div class="col-sm-1">
+            <div class="thumbnail">
+              <%=image_tag("man-1.png", height:"30", width:"30")%>
+            </div><!-- /thumbnail -->
+          </div><!-- /col-sm-1 -->
+          <div class="col-sm-5">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <% if comment.user_id.nil?  %>
+                    <%= puts 'user == nil' %>
+                <% else %>
+                    <%= comment.user.first_name %>
+                <% end %>
+              </div>
+              <div class="panel-body">
+                <% if comment.rating.nil?  %>
+                    <%= puts 'rating == nil' %>
+                <% else %>
+                    <div class="rated" data-score="<%= comment.rating %>"></div>
+                    <p><%= comment.body %></p>
+                <% end %>
+              </div><!-- /panel-body -->
+            </div><!-- /panel panel-default -->
+          </div><!-- /col-sm-5 -->
+        </div><!-- /row -->
+      <% end %>
+    <% end %>
+  </div>
+</div><!-- /col-sm-12 -->

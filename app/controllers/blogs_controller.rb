@@ -10,6 +10,10 @@ class BlogsController < ApplicationController
   # GET /blogs/1
   # GET /blogs/1.json
   def show
+    # require 'pry'
+    # binding.pry
+    @comments = @blog.comments
+    # .paginate(:page => params[:page], :per_page => 3).order("created_at DESC")
   end
 
   # GET /blogs/new
@@ -25,7 +29,6 @@ class BlogsController < ApplicationController
   # POST /blogs.json
   def create
     @blog = Blog.new(blog_params)
-
     respond_to do |format|
       if @blog.save
         format.html { redirect_to @blog, notice: 'Blog was successfully created.' }

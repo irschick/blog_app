@@ -15,7 +15,6 @@
   </div>
 </div>
 
-
 <div class="container">
   <div class="row">
     <div class="col-md-8">
@@ -26,37 +25,60 @@
     <div class="col-md-4">
       <div>
         <div class="panel panel-default">
-          <div class="panel-heading"><strong><%= @blog.headline %></strong></div>
+          <div class="panel-heading"><strong><%= @blog.headline %></strong>
+          </div>
           <div class="panel-body">
             <p>Short Description Here</p>
             <p class="post-meta">Posted by <a href="#">Michael Irschick</a> on <%= @blog.datePosted %></p>
           </div>
-        </div>
-      </div>
-      <!--Show the Highest Comment-->
-      <% if !@blog.highest_rating_comment.nil? %>
-        <% if !@blog.highest_rating_comment.bad_record? %>
-          <h3>Highest Rating</h3>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-            <div class="panel-body">
-            </div><!-- /panel-body -->
-          </div><!-- /panel panel-default -->
-        <% end %>
-      <% end %>
-      <!-- Allow new comments -->
-      <%= render 'new_comment' %>
       </div>
     </div>
+    <!--Show the Highest Comment-->
+    <% if !@blog.highest_rating_comment.nil? %>
+      <% if !@blog.highest_rating_comment.nil? %>
+        <h3>Highest Rating</h3>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>
+              <p><%= @blog.highest_rating_comment.user.first_name %> <small><em><%= "#{time_ago_in_words(@blog.highest_rating_comment.created_at)} ago" %></em></small></p>
+            </strong>
+          </div>
+          <div class="panel-body">
+            <div class="rated" data-score="<%= @blog.highest_rating_comment.rating %>"></div>
+            <p><%= @blog.highest_rating_comment.body %></p>
+          </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+      <% end %>
+    <% end %>
+    <!--Show the Highest Comment-->
+    <% if !@blog.lowest_rating_comment.nil? %>
+      <% if !@blog.lowest_rating_comment.nil? %>
+        <h3>Lowest Rating</h3>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>
+              <p><%= @blog.lowest_rating_comment.user.first_name %> <small><em><%= "#{time_ago_in_words(@blog.lowest_rating_comment.created_at)} ago" %></em></small></p>
+            </strong>
+          </div>
+          <div class="panel-body">
+            <div class="rated" data-score="<%= @blog.lowest_rating_comment.rating %>"></div>
+            <p><%= @blog.lowest_rating_comment.body %></p>
+          </div><!-- /panel-body -->
+        </div><!-- /panel panel-default -->
+      <% end %>
+    <% end %>
+    <!-- Allow new comments -->
+    <%= render 'new_comment' %>
+    </div>
+    <% if !@comments.empty? %>
+        <%= render 'comments' %>
+    <% end %>
   </div>
+</div>
 
-  <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
-    <%= link_to 'Edit', edit_blog_path(@blog) %> |
-    <%= link_to 'Back', blogs_path %>
-  </div>
-  <% if !@comments.empty? %>
-      <%= render 'comments' %>
-  <% end %>
+<div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
+  <%= link_to 'Edit', edit_blog_path(@blog) %> |
+  <%= link_to 'Back', blogs_path %>
 </div>
 
 

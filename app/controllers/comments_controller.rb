@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   def create
-    @blog = Blog.find(params[:product_id])
+    @blog = Blog.find(params[:blog_id])
     @comment = @blog.comments.new(comment_params)
     @comment.user = current_user
     respond_to do |format|
@@ -12,8 +12,6 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
-    # @comment.save
-    # redirect_to product_path(@blog)
   end
 
   def destroy

@@ -13,17 +13,20 @@
             <div class="panel panel-default">
               <div class="panel-heading">
                 <% if comment.user_id.nil?  %>
-                    <%= puts 'user == nil' %>
+                  <%= puts 'user == nil' %>
                 <% else %>
-                    <%= comment.user.first_name %>
+                  <%= comment.user.first_name %>
+                <% end %>
+                <% if signed_in? && current_user.admin? %>
+                  <%= link_to ('<span class="glyphicon glyphicon-remove"></span>').html_safe, blog_comment_path(comment.blog, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
                 <% end %>
               </div>
               <div class="panel-body">
                 <% if comment.rating.nil?  %>
-                    <%= puts 'rating == nil' %>
+                  <%= puts 'rating == nil' %>
                 <% else %>
-                    <div class="rated" data-score="<%= comment.rating %>"></div>
-                    <p><%= comment.body %></p>
+                  <div class="rated" data-score="<%= comment.rating %>"></div>
+                  <p><%= comment.body %></p>
                 <% end %>
               </div><!-- /panel-body -->
             </div><!-- /panel panel-default -->

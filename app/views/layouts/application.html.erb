@@ -32,7 +32,9 @@
     <div class="navbar-collapse collapse" id="navigationbar">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/blogs">Blogs</a></li>
-        <li><a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a></li>
+        <% if signed_in? && current_user.admin? %>
+          <li><a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a></li>
+        <% end %>
         <li>
           <% if user_signed_in? %>
               <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>

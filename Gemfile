@@ -32,6 +32,9 @@ gem 'pry'
 # authorization
 gem 'cancancan', '~> 1.10'
 
+# pagination
+gem 'will_paginate', '~> 3.1.0'
+
 # user management
 gem 'devise'
 

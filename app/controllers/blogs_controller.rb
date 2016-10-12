@@ -12,8 +12,9 @@ class BlogsController < ApplicationController
   def show
     # require 'pry'
     # binding.pry
-    @comments = @blog.comments
+    # @comments = @blog.comments
     # .paginate(:page => params[:page], :per_page => 3).order("created_at DESC")
+    @comments = @blog.comments.paginate(:page => params[:page], :per_page => 3).order("created_at DESC")
   end
 
   # GET /blogs/new

@@ -22,23 +22,27 @@
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <% @blogs.each do |blog| %>
-                <div class="post-preview">
-                  <%= link_to(blog) do %>
-                        <h2 class="post-title">
-                  <%= blog.headline %>
-                </h2>
-                      <p class="post-meta">Posted by Michael Irschick on <%= blog.datePosted %></p>
-                  <% end %>
-                </div>
-                <div>
-                  <%= link_to 'View', blog %>
-                  <%= link_to 'Edit', edit_blog_path(blog) %>
-                </div>
-                <hr>
+                  <div class="post-preview">
+                    <%= link_to(blog) do %>
+                          <h2 class="post-title">
+                    <%= blog.headline %>
+                  </h2>
+                        <p class="post-meta">Posted by Michael Irschick on <%= blog.datePosted %></p>
+                    <% end %>
+                  </div>
+                  <div>
+                    <%= link_to 'View', blog %>
+                    <% if signed_in? && current_user.admin? %>
+                      <%= link_to 'Edit', edit_blog_path(blog) %>
+                    <% end %>
+                  </div>
+                  <hr>
               <% end %>
               <ul class="pager">
                 <li class="next">
-                  <%= link_to 'Add Blog', new_blog_path %>
+                  <% if signed_in? && current_user.admin? %>
+                    <%= link_to 'Add Blog', new_blog_path %>
+                  <% end %>
                 </li>
               </ul>
             </div>

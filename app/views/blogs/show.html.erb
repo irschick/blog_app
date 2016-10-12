@@ -30,10 +30,11 @@
           <div class="panel-body">
             <p>Short Description Here</p>
             <p class="post-meta">Posted by <a href="#">Michael Irschick</a> on <%= @blog.datePosted %></p>
+            <div class="rated" data-score="<%= @blog.average_rating %>"></div>
           </div>
       </div>
     </div>
-    <!--Show the Highest Comment-->
+      <!--Show the Highest Comment-->
     <% if !@blog.highest_rating_comment.nil? %>
       <% if !@blog.highest_rating_comment.nil? %>
         <h3>Highest Rating</h3>
@@ -77,7 +78,9 @@
 </div>
 
 <div class="col-lg-8 col-lg-offset-1 col-md-10 col-md-offset-1">
-  <%= link_to 'Edit', edit_blog_path(@blog) %> |
+  <% if signed_in? && current_user.admin? %>
+    <%= link_to 'Edit', edit_blog_path(@blog) %> |
+  <% end %>
   <%= link_to 'Back', blogs_path %>
 </div>
 

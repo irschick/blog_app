@@ -1,39 +1,79 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Blog</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://use.fontawesome.com/ade38bac0c.js"></script>
-  <%= csrf_meta_tags %>
-</head>
+  <head>
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//use.fontawesome.com/ade38bac0c.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
 
-<!-- for FF, Chrome, Opera -->
-<link rel="icon" type="image/png" href="/assets/blog.png" sizes="16x16">
-<link rel="icon" type="image/png" href="/assets/blog.png" sizes="32x32">
+  <!-- for FF, Chrome, Opera -->
+  <link rel="icon" type="image/png" href="/assets/blog.png" sizes="16x16">
+  <link rel="icon" type="image/png" href="/assets/blog.png" sizes="32x32">
 
-<body data-spy="scroll" data-target=".navbar">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container-fluid" id="navfluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="home navbar-brand">
-        <a href="/">Home <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+  <body data-spy="scroll" data-target=".navbar">
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid" id="navfluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigationbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <div class="home navbar-brand">
+          <a href="/">Home <i class="fa fa-newspaper-o" aria-hidden="true"></i></a>
+        </div>
       </div>
+      <div class="navbar-collapse collapse" id="navigationbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <%= form_tag("/blogs", method: "get", class: 'nav navbar-nav navbar-form navbar-right', role: 'search') do %>
+                <%= text_field_tag(:q, params[:q], class: 'form-control', placeholder: 'Search for Blogs', style: "color: #a69eb0") %>
+                <%= submit_tag("Search", class: 'btn btn-success') do  %>
+                    <i class="glyphicon glyphicon-search"></i>
+                <%end%>
+            <% end %>
+          </li>
+          <!--<li><a href="/blogs">Blogs</a></li>-->
+          <li><a href="/blogs">Blogs <i class="fa fa-wpforms" aria-hidden="true"></i></a></li>
+          <% if signed_in? && current_user.admin? %>
+            <li><a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a></li>
+            <li><a href="/users">Users <i class="fa fa-cog" aria-hidden="true"></i></a></li>
+          <% end %>
+          <li>
+            <% if user_signed_in? %>
+                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+            <% else %>
+                <%= link_to('Login', new_user_session_path) %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+      <% if notice %>
+          <p id="notice" class="alert alert-info"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+          <p id="alert" class="alert alert-danger"><%= alert %></p>
+      <% end %>
     </div>
-    <div class="navbar-collapse collapse" id="navigationbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="/blogs">Blogs</a></li>
+  </nav>
+
+  <%= yield %>
+
+  <footer class="footer-distributed">
+    <div class="footer-left">
+      <h3>Irschick<span>Blog</span></h3>
+      <p class="footer-links">
+        <li><a href="/blogs">Blogs <i class="fa fa-wpforms" aria-hidden="true"></i></a></li>
         <% if signed_in? && current_user.admin? %>
           <li><a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a></li>
+          <li><a href="/users">Users <i class="fa fa-cog" aria-hidden="true"></i></a></li>
         <% end %>
         <li>
           <% if user_signed_in? %>
@@ -42,49 +82,35 @@
               <%= link_to('Login', new_user_session_path) %>
           <% end %>
         </li>
-      </ul>
+      </p>
+      <p class="footer-company-name">Irschick Blog &copy; 2016</p>
     </div>
-    <% if notice %>
-        <p id="notice" class="alert alert-info"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-        <p id="alert" class="alert alert-danger"><%= alert %></p>
-    <% end %>
-  </div>
-</nav>
-
-<%= yield %>
-
-<div class="container">
-  <div class="col-sm-8 col-sm-offset-2 text-center">
-    <ul class="list-inline center-block">
-      <li>
-        <a href="https://www.facebook.com/michael.irschick">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="https://twitter.com/irschick">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/irschick">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-          </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
-
-</body>
+    <div class="footer-center">
+      <div>
+        <i class="fa fa-map-marker"></i>
+        <p><span>100 Grand Ave</span> Oakland, CA</p>
+      </div>
+      <div>
+        <i class="fa fa-phone"></i>
+        <p>+1 555 123456</p>
+      </div>
+      <div>
+        <i class="fa fa-envelope"></i>
+        <p><a href="mailto:michael.irschick@gmail.com">Contact Us</a></p>
+      </div>
+    </div>
+    <div class="footer-right">
+      <p class="footer-company-about">
+        <span>About the company</span>
+        Sharing product knowledge with aspiring product leaders
+      </p>
+      <div class="footer-icons">
+        <a href="https://www.facebook.com/michael.irschick"><i class="fa fa-facebook"></i></a>
+        <a href="https://twitter.com/irschick"><i class="fa fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/michaelirschick"><i class="fa fa-linkedin"></i></a>
+        <a href="https://github.com/irschick"><i class="fa fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+  </body>
 </html>

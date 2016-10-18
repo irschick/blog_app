@@ -1,11 +1,10 @@
-<!-- Page Header -->
-<!-- Set your background image for this header on the line below. -->
 <header class="intro-header" style="background-image: url('/assets/wall.jpg')">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
           <h1>Blog</h1>
+          <h3><%= @filter_text %></h3>
           <hr class="small">
           <span class="subheading">Blogging for Product Managers</span>
         </div>
@@ -14,44 +13,43 @@
   </div>
 </header>
 
+<div class="page-header">
+  <h1>Product Manager Blog <i class="fa fa-wpforms fa-1x"></i></h1>
+</div>
+<p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-12">
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-              <% @blogs.each do |blog| %>
-                  <div class="post-preview">
-                    <%= link_to(blog) do %>
-                          <h2 class="post-title">
-                    <%= blog.headline %>
-                  </h2>
-                        <p class="post-meta">Posted by Michael Irschick on <%= blog.datePosted %></p>
-                    <% end %>
-                  </div>
-                  <div>
-                    <%= link_to 'View', blog %>
-                    <% if signed_in? && current_user.admin? %>
-                      <%= link_to 'Edit', edit_blog_path(blog) %>
-                    <% end %>
-                  </div>
-                  <hr>
-              <% end %>
-              <ul class="pager">
-                <li class="next">
-                  <% if signed_in? && current_user.admin? %>
-                    <%= link_to 'Add Blog', new_blog_path %>
-                  <% end %>
-                </li>
-              </ul>
-            </div>
+    <div class="col-md-8">
+      <div>
+        <%= render @blogs %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div>
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Top Authors</strong>
+          </div>
+          <div class="panel-body">
+            <% @top_authors.each do |author| %>
+              <p>- <%= author.name %>, # Posts: <%= author.num_blog_posts %></p>
+            <% end %>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading"><strong>Recent Blogs</strong>
+          </div>
+          <div class="panel-body">
+            <% @top_blogs.each do |top_blog| %>
+              <p><%= top_blog.headline %> <strong>Posted On:</strong><%= top_blog.datePosted %></p>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 

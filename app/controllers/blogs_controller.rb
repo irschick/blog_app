@@ -4,7 +4,31 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    # get the top authors/blogs to be displayed in side bar
+    top_blogs
+    top_authors
+
+    @filter_text = ''
+    if params[:q]
+      search_term = params[:q]
+      # puts 'now filtering'
+      if Rails.env.development?
+        @blogs = Blog.where("headline LIKE ?", "%#{search_term}%")
+      else Rails.env.production?
+        @blogs = Blog.where("headline ilike ?", "%#{search_term}%")
+      end
+      @filter_text = 'Search Results for: '+ search_term
+    else
+      @blogs = Blog.all
+    end
+  end
+
+  def top_blogs
+    @top_blogs = Blog.all
+  end
+
+  def top_authors
+    @top_authors = Author.all
   end
 
   # GET /blogs/1
@@ -46,8 +70,10 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        puts "*** @blog.content: #{@blog.content}"
-        format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
+        # require 'pry'
+        # binding.pry
+        # puts "*** @blog.blog_img: #{@blog.blog_img}"
+        format.html { redirect_to @blog, notice: 'Blog was successfully saved.' }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit }
@@ -61,7 +87,7 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     respond_to do |format|
-      format.html { redirect_to blogs_url, notice: 'Blog was successfully destroyed.' }
+      format.html { redirect_to blogs_url, notice: 'Blog was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -72,8 +98,7 @@ class BlogsController < ApplicationController
       @blog = Blog.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def blog_params
-      params.require(:blog).permit(:headline, :teaser, :content, :string, :author_id, :datePosted)
+      params.require(:blog).permit(:headline, :teaser, :content, :string, :author_id, :datePosted, :blog_img)
     end
 end

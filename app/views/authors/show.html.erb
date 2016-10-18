@@ -1,21 +1,29 @@
+<div class="page-header">
+  <h1>View Author <i class="fa fa-child fa-1x"></i></h1>
+</div>
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @author.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @author.email %>
-</p>
-
-<p>
-  <strong>Picurl:</strong>
-  <%= @author.picUrl %>
-</p>
-
-<% if signed_in? && current_user.admin? %>
-    <%= link_to 'Edit', edit_author_path(@author) %> |
-<% end %>
-<%= link_to 'Back', authors_path %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          View Author
+          <div class="pull-right">
+            <a href="/authors">Authors <i class="fa fa-child" aria-hidden="true"></i></a>
+            <%= link_to 'Edit', edit_author_path(@author) %>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <strong>Author name:</strong>
+            <%= @author.name %>
+          </div>
+          <div class="field">
+            <strong>Email:</strong>
+            <%= @author.email %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -32,6 +32,8 @@ gem 'pry'
 # authorization
 gem 'cancancan', '~> 1.10'
 
+gem 'compass'
+
 # pagination
 gem 'will_paginate', '~> 3.1.0'
 

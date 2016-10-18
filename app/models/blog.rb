@@ -1,8 +1,12 @@
 class Blog < ActiveRecord::Base
-  validates :name, presence: true
+  # validates :name, presence: true
 
   belongs_to :user
   has_many :comments
+  #
+  # def blog_img
+  #   return "http://www.patagonia.com/dis/dw/image/v2/ABBM_PRD/on/demandware.static/-/Sites-patagonia-master/default/dwf4d4ab65/images/hi-res/25455_MOTW_OM2.jpg?sw=750&sh=750&sm=fit&sfrm=png"
+  # end
 
   def first_rating
     comments.first.rating

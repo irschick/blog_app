@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :blogs
   has_many :comments
+
+  after_create :send_admin_mail
+  def send_admin_mail
+    UserMailer.send_new_user_message(self).deliver
+  end
 end

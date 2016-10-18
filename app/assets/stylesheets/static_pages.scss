@@ -27,14 +27,15 @@ h6 {
 a {
   color: #333333;
 }
-a:hover,
-a:focus {
-  color: #0085A1;
-}
-a img:hover,
-a img:focus {
-  cursor: zoom-in;
-}
+//
+//a:hover,
+//a:focus {
+//  color: #0085A1;
+//}
+//a img:hover,
+//a img:focus {
+//  cursor: zoom-in;
+//}
 
 .home a {
   color: white;
@@ -43,8 +44,9 @@ a img:focus {
 }
 
 .navbar-fixed-top {
-  background-color: cornflowerblue;
-  border: 2px solid darkblue;
+  //background-color: cornflowerblue;
+  background-color: #292c2f;
+  //border: 2px solid darkblue;
   /*height: 10px;*/
 }
 
@@ -80,10 +82,10 @@ a:hover {
   color: white;
 }
 
-.navbar-fixed-bottom {
-  background-color: cornflowerblue;
-  border: 2px solid darkblue;
-}
+//.navbar-fixed-bottom {
+//  background-color: cornflowerblue;
+//  border: 2px solid darkblue;
+//}
 
 
 //Typography

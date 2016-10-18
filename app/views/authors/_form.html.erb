@@ -1,27 +1,41 @@
-<%= form_for(@author) do |f| %>
-    <% if @author.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@author.errors.count, "error") %> prohibited this product from being saved:</h2>
-          <ul>
-            <% @author.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Edit Author
         </div>
-    <% end %>
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
+        <div class="panel-body">
+          <%= form_for(@author) do |f| %>
+              <% if @author.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@author.errors.count, "error") %> prohibited this author from being saved:</h2>
+                    <ul>
+                      <% @author.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+              <div class="field">
+                <%= f.label :name %><br>
+                <%= f.text_field :name %>
+              </div>
+              <div class="field">
+                <%= f.label :email %><br>
+                <%= f.text_field :email, :size=>"30" %>
+              </div>
+              <div class="actions">
+                <button id="whatever" class="btn btn-primary btn-sm" name="submit" type="submit">
+                  <span>Save Author</span>
+                  <i class="icon-ok" style="font-size:20px; vertical-align: middle;"></i>
+                </button>
+                <%= link_to 'Cancel', @author %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :email %><br>
-      <%= f.text_field :email %>
-    </div>
-    <div class="actions">
-      <button id="whatever" class="btn btn-primary" name="submit" type="submit">
-        <span>Save</span>
-        <i class="icon-ok" style="font-size:20px; vertical-align: middle;"></i>
-      </button>
-    </div>
-<% end %>
+  </div>
+</div>
 

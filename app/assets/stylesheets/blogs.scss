@@ -2,6 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+/* unvisited link */
+//a:link {
+//  color: blue;
+//}
+
+/* visited link */
+//a:visited {
+//  color: green;
+//}
+
+///* mouse over link */
+//a:hover {
+//  color: hotpink;
+//}
+
+///* selected link */
+//a:active {
+//  color: blue;
+//}
+
+//Used for showing outline on product list page
+#blog_div:hover {
+  border: 2px solid lightblue;
+}
+
+#blog_div {
+  border: 2px solid transparent;
+}
+
 .digg_pagination {
   background: white;
   cursor: default;

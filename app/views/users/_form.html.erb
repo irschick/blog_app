@@ -1,25 +1,55 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Edit User
+        </div>
+        <div class="panel-body">
+          <%= form_for(@user) do |f| %>
+              <% if @user.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+                    <ul>
+                      <% @user.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+              <div class="field">
+                <%= f.label :first_name %><br>
+                <%= f.text_field :first_name %>
+              </div>
+              <div class="field">
+                <%= f.label :last_name %><br>
+                <%= f.text_field :last_name %>
+              </div>
+              <div class="field">
+                <%= f.label :email %><br>
+                <%= f.text_field :email, :size=>"30" %>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2">Admin?</label>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <label class="form-check-label .checkbox-primary ">
+                      <%= f.check_box :admin %>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="actions">
+                <button id="whatever" class="btn btn-primary btn-sm" name="submit" type="submit">
+                  <span>Save User</span>
+                  <i class="icon-ok" style="font-size:20px; vertical-align: middle;"></i>
+                </button>
+                <%= link_to 'Cancel', @user %>
+              </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
